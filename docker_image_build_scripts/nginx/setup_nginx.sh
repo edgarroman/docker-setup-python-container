@@ -2,10 +2,8 @@
 set -e
 source /image_build/buildconfig
 
-header "Setting up NGINX core "
+header "Setting up NGINX core"
 
-# This was left over from Centos setup - still needed?
-#run apt -y install epel-release
 run apt -y install nginx
 
 header "Setting up NGINX hooks"
@@ -34,17 +32,8 @@ run mkdir -p $NGINX_USER_CONF_DIR
 run cp -r /image_build/nginx/config/nginx_user.conf $NGINX_USER_CONF_DIR/nginx.conf
 run ln -s $NGINX_USER_CONF_DIR/nginx.conf $NGINX_CORE_CONF_DIR/nginx.conf
 
-# Setup launch at startup
-#run mkdir /etc/service/nginx
-#run cp -r /image_build/nginx/runit/nginx.sh /etc/service/nginx/run
-#run chmod +x /etc/service/nginx/run;
-
 # Uncomment this to halt auto-start of nginx
 # run touch /etc/service/nginx/down
-
-#run mkdir /etc/service/nginx-log-forwarder
-#run cp -r /image_build/nginx/runit/nginx-log-forwarder.sh /etc/service/nginx-log-forwarder/run
-#run chmod +x /etc/service/nginx-log-forwarder/run;
 
 # Log rotation
 # In the file /etc/logrotate.d/nginx
