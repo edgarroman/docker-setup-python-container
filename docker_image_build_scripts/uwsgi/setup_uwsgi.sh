@@ -10,7 +10,6 @@ USER_NAME=default
 USER_HOME=/opt/app-root/src
 UWSGI_USER_CONF_DIR=$USER_HOME/etc/
 
-#run yum -y install uwsgi
 run pip install -Iv uwsgi==$UWSGI_VERSION
 
 # Place a dummy wsgi application file in the user directory
