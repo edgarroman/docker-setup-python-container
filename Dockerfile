@@ -11,10 +11,13 @@ FROM $BASE_IMAGE AS base
 
 EXPOSE 8000
 
-ADD ./docker_image_build_scripts /image_build
-
 # Change active user to root
 USER 0
+
+RUN apt update -y
+RUN apt install vim -y
+
+ADD ./docker_image_build_scripts /image_build
 
 RUN /image_build/setup.sh
 

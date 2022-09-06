@@ -20,11 +20,6 @@ run mkdir -p $SETUP_DIR_BIN
 SETUP_DIR_SBIN=/usr/local/sbin/
 run mkdir -p $SETUP_DIR_SBIN
 
-header "Running General Updates"
-
-run apt update -y
-run apt upgrade -y
-
 header "Installing tini"
 
 TINI_VERSION=v0.19.0

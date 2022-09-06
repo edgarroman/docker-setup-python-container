@@ -1,8 +1,5 @@
 #!/bin/sh
-# `/sbin/setuser webuser` runs the given command as the user `webuser`.
-# If you omit that part, the command will be run as root.
 #
-# TODO look at sane options: https://github.com/GrahamDumpleton/warpdrive/blob/master/warpdrive/etc/start-uwsgi
 #
 USER_NAME=default
 USER_HOME=/opt/app-root/src
