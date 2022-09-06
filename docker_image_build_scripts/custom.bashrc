@@ -6,3 +6,6 @@ echo '======== Running Custom Bash ============'
 export PS1="\[\033[35m\]<Docker Development Environment> :\[\033[33;1m\]\w\[\033[m\]\$ "
 
 alias ll='ls -lart'
+
+# When doing pip commands, it requires a writeable directory for the cache.
+export PIP_CACHE_DIR=/tmp/cache

@@ -48,3 +48,13 @@ To run the container
 ```sh
 docker compose run --rm -p 8000:8000 app bash
 ```
+
+### Django setup
+
+```sh
+python -m venv ve
+source ve/bin/activate
+pip install django
+django-admin startproject mysite .
+python manage.py runserver 0:8000
+```

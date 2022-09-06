@@ -9,6 +9,7 @@ header "Setting up uWSGI version $UWSGI_VERSION"
 USER_NAME=default
 USER_HOME=/opt/app-root/src
 UWSGI_USER_CONF_DIR=$USER_HOME/etc/
+WEBAPP_DIR=/opt/app-root/webapp
 
 run pip install -Iv uwsgi==$UWSGI_VERSION
 
@@ -17,6 +18,9 @@ run cp -r /image_build/uwsgi/hello.wsgi $USER_HOME/hello.wsgi
 
 # Alright, now setup default uwsgi webapp
 run ln -s $USER_HOME/hello.wsgi $USER_HOME/main.wsgi
+
+# if there exists a `wsgi.py` file in the webapp
+run [ -e $WEBAPP_DIR/mysite/wsgi.py ] && ln -s -f $WEBAPP_DIR/wsgi.py $USER_HOME/main.wsgi
 
 # make log directory
 run mkdir -p /var/log/uwsgi
