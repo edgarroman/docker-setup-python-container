@@ -17,9 +17,6 @@ run pip install -Iv uwsgi==$UWSGI_VERSION
 run cp -r /image_build/uwsgi/hello.wsgi $USER_HOME/hello.wsgi
 run cp -r /image_build/uwsgi/uwsgi-config.ini $USER_HOME/uwsgi-config.ini
 
-# Alright, now setup default uwsgi webapp
-# run ln -s $USER_HOME/hello.wsgi $USER_HOME/main.wsgi
-
 # make log directory
 run mkdir -p /var/log/uwsgi
 chgroup_dir_to_rw_zero "/var/log/uwsgi"
