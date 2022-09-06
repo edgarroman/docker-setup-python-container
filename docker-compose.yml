@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    platform: "linux/amd64"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server-code:/opt/app-root/webapp
+    command: /bin/bash
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t

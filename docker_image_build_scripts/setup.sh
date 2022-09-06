@@ -20,6 +20,8 @@ run mkdir -p $SETUP_DIR_BIN
 SETUP_DIR_SBIN=/usr/local/sbin/
 run mkdir -p $SETUP_DIR_SBIN
 
+run cp -r /image_build/custom.bashrc /.bashrc
+
 header "Installing tini"
 
 TINI_VERSION=v0.19.0
@@ -31,11 +33,11 @@ run chmod g+x $SETUP_DIR_SBIN/tini
 
 ##########################################################################
 # Install NGINX
-run /image_build/nginx/setup_nginx.sh
+#run /image_build/nginx/setup_nginx.sh
 
 ##########################################################################
 # Install uwsgi
-run /image_build/uwsgi/setup_uwsgi.sh
+#run /image_build/uwsgi/setup_uwsgi.sh
 
 ##########################################################################
 # Install our entrypoint script to handle when started as a random user

@@ -40,3 +40,11 @@ to get interactive shell
 ```sh
 docker run -ti --platform linux/amd64 -p 8000:8000 --rm mypythonapp:DEV  /bin/bash
 ```
+
+## Development
+
+To run the container
+
+```sh
+docker compose run --rm -p 8000:8000 app bash
+```

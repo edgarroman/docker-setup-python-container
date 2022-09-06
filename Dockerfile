@@ -24,4 +24,8 @@ RUN /image_build/setup.sh
 # Change active user to be non-root
 USER 1001
 
+RUN PS1="\[\033[35m\]Development Environment!\[\033[m\]-\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
+
+WORKDIR /opt/app-root/webapp 
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
