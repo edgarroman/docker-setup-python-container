@@ -20,24 +20,27 @@ run mkdir -p $SETUP_DIR_BIN
 SETUP_DIR_SBIN=/usr/local/sbin/
 run mkdir -p $SETUP_DIR_SBIN
 
+# When running an interactive bash shell, we want to customize the prompt and other
+# environment preferences.  Since the user we are using does not have a home directory,
+# we'll just plop the .bashrc in the root directory
 run cp -r /image_build/custom.bashrc /.bashrc
 
 header "Installing tini"
 
 TINI_VERSION=v0.19.0
 run wget https://github.com/krallin/tini/releases/download/$TINI_VERSION/tini -O $SETUP_DIR_SBIN/tini
-run wget https://github.com/krallin/tini/releases/download/$TINI_VERSION/tini.asc -O $SETUP_DIR_SBINtini.asc
+#run wget https://github.com/krallin/tini/releases/download/$TINI_VERSION/tini.asc -O $SETUP_DIR_SBINtini.asc
 ##run gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 \
 ## && gpg --verify /tini.asc
 run chmod g+x $SETUP_DIR_SBIN/tini
 
 ##########################################################################
 # Install NGINX
-#run /image_build/nginx/setup_nginx.sh
+run /image_build/nginx/setup_nginx.sh
 
 ##########################################################################
 # Install uwsgi
-#run /image_build/uwsgi/setup_uwsgi.sh
+run /image_build/uwsgi/setup_uwsgi.sh
 
 ##########################################################################
 # Install our entrypoint script to handle when started as a random user
