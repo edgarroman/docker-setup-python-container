@@ -17,15 +17,21 @@ USER 0
 RUN apt update -y
 RUN apt install vim -y
 
-ADD ./docker_image_build_scripts /image_build
+COPY ./docker_image_build_scripts /image_build
 
 RUN /image_build/setup.sh
 
 # Change active user to be non-root
 USER 1001
-
-RUN PS1="\[\033[35m\]Development Environment!\[\033[m\]-\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
-
 WORKDIR /opt/app-root/webapp 
+
+
+FROM base as production
+
+# The next lines are for Production builds only!
+COPY --chown=1001:0 ./server-code /opt/app-root/webapp/
+WORKDIR /opt/app-root/webapp 
+RUN python -m venv /opt/app-root/webapp/venv 
+RUN /opt/app-root/webapp/venv/bin/pip install -r /opt/app-root/webapp/requirements.txt
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
