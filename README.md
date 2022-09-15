@@ -22,8 +22,8 @@ docker compose run --rm -p 8000:8000 app bash
 ### Django setup
 
 ```sh
-python -m venv venv
-source venv/bin/activate
+python -m venv /opt/venv
+source /opt/venv/bin/activate
 pip install django
 django-admin startproject mysite .
 python manage.py runserver 0:8000
