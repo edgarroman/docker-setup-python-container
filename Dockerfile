@@ -1,5 +1,5 @@
 # Base node images can be found here: https://hub.docker.com/_/python
-ARG BASE_IMAGE=python:3.10.6-bullseye
+ARG BASE_IMAGE=python:3.10-slim-bullseye
 
 # Things you can update:
 #  - version of tini - see base_image_setup/setup.sh
@@ -18,11 +18,13 @@ FROM $BASE_IMAGE AS base
 #################################################
 # Default folders and whatnot
 ARG IMAGE_BUILD_ROOT=/image_build
-ARG APP_HOME=/opt/app-root/webapp
-ARG APP_SCRIPTS=/opt/app-root/src
 ARG SETUP_DIR_BIN=/usr/local/bin
 ARG SETUP_DIR_SBIN=/usr/local/sbin
 ARG USER_NAME=default 
+# Be careful changing these next two since other files in the build process 
+# are expecting these values
+ARG APP_HOME=/opt/app-root/webapp
+ARG APP_SCRIPTS=/opt/app-root/src
 
 EXPOSE 8000
 
@@ -33,7 +35,12 @@ USER 0
 #################################################
 # Update packages
 RUN apt update -y
-RUN apt install vim -y
+# Feel free to add vim you you enjoy using that
+#RUN apt-get install vim -y
+# Needed to get tini
+RUN apt-get install wget -y
+# Needed to build uwsgi
+RUN apt-get install gcc -y
 
 COPY ./docker_image_build_scripts/helpers /image_build/helpers
 
@@ -61,7 +68,12 @@ WORKDIR ${APP_HOME}
 #####################################################################
 FROM base as production
 
-# The next lines are for Production builds only!
+# Remove any packages we downloaded for building the image or development workflow
+USER 0
+RUN apt-get purge vim -y && apt-get purge wget -y && apt-get purge gcc -y 
+RUN apt clean 
+
+# Copy over the app source code into the app home dir
 COPY --chown=1001:0 ./server-code /opt/app-root/webapp/
 
 USER 1001
