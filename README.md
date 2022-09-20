@@ -46,6 +46,12 @@ to run
 docker run -d -p 8000:8000 mypythonapp:0.5
 ```
 
+If you get the error: `WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested 64f75af4c7d42883d67a27d80380bcc96896febbb284145866a2a700443ac322` then run:
+
+```sh
+docker run -d -p 8000:8000 --platform linux/amd64 mypythonapp:0.5
+```
+
 to get interactive shell
 
 ```sh
