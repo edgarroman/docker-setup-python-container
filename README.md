@@ -36,7 +36,7 @@ python manage.py runserver 0:8000
 Note: `--platform=linux/amd64` for newer macs with M1/M2 processors
 
 ```sh
-docker build . --target=production --platform=linux/amd64 -t mypythonapp:0.5
+docker buildx build . --platform linux/amd64 --target=production -t mypythonapp:0.5
 ```
 
 to run

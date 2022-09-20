@@ -28,9 +28,19 @@ WORKDIR /opt/app-root/webapp
 
 FROM base as production
 
+USER 0
+RUN chgrp -R 0 /opt
+RUN chmod -R g+rwX /opt
+
+
 # The next lines are for Production builds only!
 COPY --chown=1001:0 ./server-code /opt/app-root/webapp/
 WORKDIR /opt/app-root/webapp 
+#RUN mkdir /opt/venv
+#RUN chown -R 1001:0 /opt/venv
+
+USER 1001
+
 RUN python -m venv /opt/venv 
 RUN /opt/venv/bin/pip install -r /opt/app-root/webapp/requirements.txt
 
