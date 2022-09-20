@@ -8,8 +8,8 @@ This folder primarily holds:
 
 -   The development virtual environment
 
-    It would be a huge bummer to run `pip install -r requirements.txt` everytime you started the container!
-    So we put the virtual environment here. If you want to update the virtual environment, just delete the
-    virtual environment folder.
+It would be a huge bummer to run `pip install -r requirements.txt` everytime you started the container during development!
+So we put the virtual environment here. If you want to update the virtual environment, just delete the
+virtual environment folder.
 
-Note this directory is **not** used for production builds
+Note this directory is **not** used for production builds.

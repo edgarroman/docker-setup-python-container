@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
-source /image_build/buildconfig
+# Activate some helper utilities that we'll us in this file like 'header', 'run', and 'chgroup_dir_to_rw_zero'
+source ${IMAGE_BUILD_ROOT}/helpers/helper_functions
 
 header "Setting up NGINX core"
 
@@ -8,10 +9,8 @@ run apt -y install nginx
 
 header "Setting up NGINX hooks"
 
-# This username should match what is default user set as
-USER_NAME=default
-USER_HOME=/opt/app-root/src
-NGINX_USER_CONF_DIR=$USER_HOME/etc/
+# Allows application to override NGINX settings
+NGINX_USER_CONF_DIR=${APP_SCRIPTS}/etc/
 
 # Main.d is used to add entries at the root level of nginx.conf
 NGINX_CORE_MAIN_CONF_DIR=/etc/nginx/main.d/
@@ -23,13 +22,13 @@ NGINX_CORE_CONF_DIR=/etc/nginx/conf.d/
 # to add numerous separate and distinct .conf files
 run mkdir -p $NGINX_CORE_MAIN_CONF_DIR
 run mkdir -p $NGINX_CORE_CONF_DIR
-run cp -r /image_build/nginx/config/nginx_core.conf /etc/nginx/nginx.conf
+run cp -r ${IMAGE_BUILD_ROOT}/nginx/config/nginx_core.conf /etc/nginx/nginx.conf
 
 # Do the local user setup
 # By symbolic linking of the user nginx.conf file to the nginx conf directory
 # the user may push updates to nginx without needing root access
 run mkdir -p $NGINX_USER_CONF_DIR
-run cp -r /image_build/nginx/config/nginx_user.conf $NGINX_USER_CONF_DIR/nginx.conf
+run cp -r ${IMAGE_BUILD_ROOT}/nginx/config/nginx_user.conf $NGINX_USER_CONF_DIR/nginx.conf
 run ln -s $NGINX_USER_CONF_DIR/nginx.conf $NGINX_CORE_CONF_DIR/nginx.conf
 
 # Uncomment this to halt auto-start of nginx
