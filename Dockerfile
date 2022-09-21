@@ -39,7 +39,7 @@ RUN apt update -y
 #RUN apt-get install vim -y
 # Needed to get tini
 RUN apt-get install wget -y
-# Needed to build uwsgi
+# Needed to build uwsgi if you use the 'slim' docker image
 RUN apt-get install gcc -y
 
 COPY ./docker_image_build_scripts/helpers /image_build/helpers
