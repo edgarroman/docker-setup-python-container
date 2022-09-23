@@ -26,6 +26,9 @@ ARG USER_NAME=default
 ARG APP_HOME=/opt/app-root/webapp
 ARG APP_SCRIPTS=/opt/app-root/src
 
+ENV APP_HOME=${APP_HOME}
+ENV APP_SCRIPTS=${APP_SCRIPTS}
+
 EXPOSE 8000
 
 #################################################
@@ -36,7 +39,7 @@ USER 0
 # Update packages
 RUN apt update -y
 # Feel free to add vim you you enjoy using that
-#RUN apt-get install vim -y
+RUN apt-get install vim -y
 # Needed to get tini
 RUN apt-get install wget -y
 # Needed to build uwsgi if you use the 'slim' docker image

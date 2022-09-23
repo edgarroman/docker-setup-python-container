@@ -1,8 +1,6 @@
 #!/bin/sh
 #
 #
-USER_NAME=default
-USER_HOME=/opt/app-root/src
 
 exec /usr/local/bin/uwsgi \
     --socket /tmp/uwsgi.sock \
@@ -12,5 +10,6 @@ exec /usr/local/bin/uwsgi \
     --processes=5 \
     --harakiri=20 \
     --max-requests=5000 \
-    --ini $USER_HOME/uwsgi-config.ini \
-    >>/var/log/uwsgi/uwsgi.log 2>&1
+    --ini $APP_SCRIPTS/uwsgi-config.ini
+# \
+#>>/var/log/uwsgi/uwsgi.log 2>&1

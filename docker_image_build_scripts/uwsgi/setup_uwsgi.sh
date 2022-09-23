@@ -14,6 +14,7 @@ run pip install -Iv uwsgi==$UWSGI_VERSION
 # Place a dummy wsgi application file in the user directory
 run cp -r ${IMAGE_BUILD_ROOT}/uwsgi/hello.wsgi ${APP_SCRIPTS}/hello.wsgi
 run cp -r ${IMAGE_BUILD_ROOT}/uwsgi/uwsgi-config.ini ${APP_SCRIPTS}/uwsgi-config.ini
+run cp -r ${IMAGE_BUILD_ROOT}/uwsgi/startwsgi.py ${APP_SCRIPTS}/startwsgi.py
 
 # make log directory
 run mkdir -p /var/log/uwsgi
