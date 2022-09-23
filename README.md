@@ -39,10 +39,15 @@ Note: `--platform=linux/amd64` for newer macs with M1/M2 processors
 docker buildx build . --platform linux/amd64 --target=production -t mypythonapp:0.5
 ```
 
-to run
+to run with logs:
 
 ```sh
-# old: docker run -ti --platform linux/amd64 -p 8000:8000 --rm mypythonapp:DEV
+docker run -ti --platform linux/amd64 -p 8000:8000 --rm mypythonapp:0.5
+```
+
+to run in background
+
+```sh
 docker run -d -p 8000:8000 mypythonapp:0.5
 ```
 
